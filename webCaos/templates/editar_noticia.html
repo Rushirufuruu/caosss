@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block contenido %}
+    <header>
+        <nav class="navbar navbar-expand-md py-2  navbar-light" style="background-color: rgb(226, 235, 238);" >
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'IND' %}">
+                    <img class="logo-pag" src="{% static 'img/LogoCaosNews.png' %}" alt="logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link " aria-current="page" href="{% url 'IND' %}">Inicio</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="{% url 'GAL' %}">Galería</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Categorías
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{% url 'DEP' %}">Deportes</a></li> 
+                        <li><a class="dropdown-item" href="{% url 'NAC' %}">Nacional</a></li>
+                        <li><a class="dropdown-item" href="{% url 'INT' %}">Internacional</a></li>
+                        <li><a class="dropdown-item" href="{% url 'POL' %}">Política</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'INI' %}">Ingresar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'PROD' %}">Productos CN</a>
+                </li>
+                </ul>
+                <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
+            </div>
+            
+        </nav>
+       
+   </header>   
+    <body style="background-color:  rgb(74, 84, 114);">
+        <main>
+            <div class="formulario">
+                <h2>Editar Noticia</h2>
+                <form action="{% url 'EDN' %}" method="post" onsubmit="return validar()" enctype="multipart/form-data">
+                    <input type="hidden" name="txtId" value="{{noticia.idNoticia}}">
+                    <label for="titulo">Título:</label>
+                    <input type="text" id="txtTitulo" name="txtTitulo" value="{{noticia.titulo}}">
+                
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="txtDescripcion" name="txtDescripcion" rows="10" cols="50">{{noticia.descripcion}}</textarea><br>
+
+                    Fecha: {{noticia.fecha}}
+                    <label for="fecha-ingreso">Fecha de ingreso:</label>
+                    <input type="date" id="datFecha" name="datFecha" required>
+
+                    Imagen: <img src="{{noticia.foto.url}}" alt="" width="200px" height="200px">
+                    <label for="foto">Imagen:</label>
+                    <input type="file" class="col-g" name="txtImg" id="txtImg" value="{{noticia.foto}}">
+
+                    <label for="categoria">Categoria:</label>
+                    <select name="cboCategoria" class="col-g" id="cboCategoria">
+                        {% for item in categorias %}
+                            {% if item.nombre == noticia.categoria.nombre %}
+                                <option selected value="{{item.nombre}}">{{item.nombre}}</option>
+                            {% else %}
+                                <option value="{{item.nombre}}">{{item.nombre}}</option> 
+                            {% endif %}
+                        {% endfor %}                                               
+                </select>
+                {% csrf_token %}
+                    <p></p>
+
+                
+                    <input class="col-p" href="" type="submit" value="Editar" id="Enviar" onclick="validar()">
+                </form>
+            </div>
+        
+        </main>
+    </body>
+
+{% endblock contenido %}

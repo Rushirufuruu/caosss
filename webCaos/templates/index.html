@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block contenido %}
+    <main>
+        <div class="titulo">
+            <h1>CAOS NEWS</h1>
+        </div>
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+            <div class="carousel-inner">
+                {% for noti in noticias %}
+                    <div class="carousel-item active c-item">
+                        <img src="{{ noti.foto.url }}" class="d-block w-100 c-img" alt="...">
+                    </div>
+                {% endfor %}
+                
+           
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+
+        <div class="destacados">
+            <h1>DESTACADOS</h1>
+            <div class="container py-4">
+                <div class="row row-cols-4 g-4">
+                   {% for noticia in noticias %}
+
+                            <div class="col">
+                                <div class="card h-100" >
+                                    <img src={{noticia.foto.url}}  class="card-img-top" alt="..." style="height: 220px;">
+                                    <div class="card-body">
+                                        <p class="card-text"> {{noticia.fecha}} </p>
+                                        <h5 class="card-text text-muted"> {{noticia.titulo}} </h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                    {% endfor %} 
+                 
+                </div>
+            </div>
+            <div class="d-grid gap-2 col-1 mx-auto" style="padding-bottom: 20px;">
+                <a href="{% url 'GAL' %}"><button type="button" class="btn btn-dark">Ver más...</button></a>
+            </div>
+            
+        </div>
+        
+    </main>
+  
+
+{% endblock contenido %}
+  

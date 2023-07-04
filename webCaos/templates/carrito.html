@@ -1,0 +1,110 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block contenido %}
+    <header>
+        <nav class="navbar navbar-expand-md py-2  navbar-light" style="background-color: rgb(226, 235, 238);" >
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'IND' %}">
+                    <img class="logo-pag" src="{% static 'img/LogoCaosNews.png' %}" alt="logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link " aria-current="page" href="{% url 'IND' %}">Inicio</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="{% url 'GAL' %}">Galería</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Categorías
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{% url 'DEP' %}">Deportes</a></li> 
+                        <li><a class="dropdown-item" href="{% url 'NAC' %}">Nacional</a></li>
+                        <li><a class="dropdown-item" href="{% url 'INT' %}">Internacional</a></li>
+                        <li><a class="dropdown-item" href="{% url 'POL' %}">Política</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'INI' %}">Ingresar</a>
+                </li>
+                </ul>
+                <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
+            </div>
+            
+        </nav>
+    
+    </header>
+    <body style="background-color:  rgb(74, 84, 114);">
+        <main>
+            <h1 style="text-align: center; color: black;" >PRODUCTOS CN</h1>
+
+
+            <div class="container py-4">
+                <div class="row row-cols-4 g-4">
+                    {% for prod in produ %}
+                            <div class="col">
+                                <div class="card h-100" >
+                                    <img src={{prod.foto.url}}  class="card-img-top" alt="..." style="height: 230px;">
+                                    <div class="card-body">
+                                        <h5 class="card-text"> {{prod.nombreProducto}} </h5>
+                                        <p class="card-text"> {{prod.precio}} CLP </p>
+                                        <a href="{% url 'AC' prod.idProducto %}" class="btn btn-dark">Agregar al carrito</a>
+                                    </div>
+                                </div>
+                            </div>
+                    {% endfor %} 
+                </div>
+            </div>
+        
+        </main>
+
+        {% if request.session.carrito.items %}
+            {% for key , value in request.session.carrito.items  %}
+                <div class="carrito">
+                    <div class="header-carrito">
+                        <h2>Tu Carrito</h2>
+                    </div>
+
+                    <div class="carrito-items">
+                        <div class="carrito-item">
+                            
+                            <div class="carrito-item-detalles">
+                                
+                                <span class="carrito-item-titulo">{{value.nombre}}</span>
+                                <div class="selector-cantidad">
+                                    <a href="{% url 'RC' value.idProducto %}" class="fa-solid fa-minus" style="text-decoration: none; color: rgb(30, 48, 80);"></a>
+                                    {{value.cantidad}}
+                                    <a href="{% url 'AC' value.idProducto %}" class="fa-solid fa-plus fa-sm" style="text-decoration: none; color: rgb(30, 48, 80);"></a>
+                                </div>
+                                <span class="carrito-item-precio">${{value.precio}} CLP</span>
+                                <a href="{% url 'EC' value.idProducto %}" class="fa-solid fa-trash" style="text-decoration: none;"></a>
+                            </div>
+                        </div>
+
+                        <div class="carrito-total">
+                            <div class="fila">
+                                <strong>Tu total</strong>
+                                <span class="carrito-precio-total">${{total}}</span>
+                            </div>
+                            <button class="btn-pagar">pagar</button>
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+{% endblock contenido %}
+
+
+  

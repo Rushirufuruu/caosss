@@ -1,0 +1,27 @@
+.perfil {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+  
+.perfil h2 {
+    margin-bottom: 20px;
+}
+  
+.perfil p {
+    display: block;
+    margin-bottom: 8px;
+    text-align: left;
+}
+  
+
+
+  
+.formulario p {
+    margin-top: 20px;
+  }

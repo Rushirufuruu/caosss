@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+        
+{% block contenido %}
+        <div class="deportes">
+            <h1>NOTICIAS</h1>
+            <div class="container py-4">
+                <div class="row row-cols-4 g-4">
+                    {% for noticia in noticias %}
+                            <div class="col">
+                                <div class="card h-100" >
+                                    <img src={{noticia.foto.url}}  class="card-img-top" alt="..." style="height: 230px;">
+                                    <div class="card-body">
+                                        <p class="card-text"> {{noticia.fecha}} </p>
+                                        <h5 class="card-text text-muted"> {{noticia.titulo}} </h5>
+                                        <button class="btn btn-primary"><a href="{% url 'GNT' noticia.idNoticia %}" style="text-decoration: none; color: white;"> ver noticia</a></button>
+                                    </div>
+                                </div>
+                            </div>
+                    {% endfor %} 
+                </div>
+            </div>>     
+        </div>
+ 
+{% endblock contenido %}

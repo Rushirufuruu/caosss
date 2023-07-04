@@ -1,0 +1,74 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block contenido %}
+    <header>
+        <nav class="navbar navbar-expand-md py-2  navbar-light" style="background-color: rgb(226, 235, 238);" >
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'IND' %}">
+                    <img class="logo-pag" src="{% static 'img/LogoCaosNews.png' %}" alt="logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link " aria-current="page" href="{% url 'IND' %}">Inicio</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="{% url 'GAL' %}">Galería</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Categorías
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{% url 'DEP' %}">Deportes</a></li> 
+                        <li><a class="dropdown-item" href="{% url 'NAC' %}">Nacional</a></li>
+                        <li><a class="dropdown-item" href="{% url 'INT' %}">Internacional</a></li>
+                        <li><a class="dropdown-item" href="{% url 'POL' %}">Política</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'PROD' %}">Productos CN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'INI' %}">Ingresar</a>
+                </li>
+                </ul>
+                <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
+            </div>
+            
+        </nav>
+    
+    </header>
+    <body style="background-color:  rgb(74, 84, 114);">
+        <main>
+            <div class="formulario">
+                <h2>Inicia sesión</h2>
+                <form action="{% url 'LOGIN' %}" method="post" onsubmit="validar()" >
+                <label for="correo">Correo:</label>
+                <input type="text" id="txtEmail" name="txtEmail" >
+            
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="pwdPass1" name="pwdPass1" >
+            
+                <input class="col-p" type="submit" value="Enviar" id="Enviar" onclick="validar()">
+                <p>¿Aún no tienes una cuenta? <a href="{% url 'FORM'%}">Crea una aquí</a></p>
+                {%csrf_token%}
+                </form>
+            </div>
+        
+        </main>
+    </body>
+
+{% endblock contenido %}
+
+
+  

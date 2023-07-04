@@ -1,0 +1,109 @@
+
+@import url(form.css);
+@import url(perfil.css);
+@import url(carrito.css);
+.logo-pag {
+    height: 50px;
+    width: 50px;
+}
+
+/* para las imagenes del carrusel*/
+.c-item{
+    height: 440px;
+}
+.c-img{
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Título caos news*/
+.titulo{
+    margin-top: 75px;
+}
+.titulo h1{
+    text-align: center;
+   
+    margin-bottom: 15px;
+}
+
+/*Seccion de destacados*/
+
+.destacados{
+    background-color: rgb(252,36,60);
+    height: 100%;
+    width: 100%;
+    
+}
+.destacados h1{
+    text-align: center;
+    color: white;
+    padding-top: 80px;
+}
+/*Cartas de destacados*/
+.card{
+    height: 566px;
+}
+
+/*Seccion de deportes*/
+.deportes{
+    background-color: rgb(5, 86, 152);
+    height: 100%;
+    width: 100%;
+    
+}
+.deportes h1{
+    text-align: center;
+    color: white;
+    padding-top: 80px;
+}
+
+
+/*seccion nacional*/
+.nacional{
+    background-color: rgb(62, 64, 66);
+    height: 100%;
+    width: 100%;
+    
+}
+.nacional h1{
+    text-align: center;
+    color: white;
+    padding-top: 25px;
+}
+
+/*seccion internacional*/
+.internacional{
+    background-color: rgb(252,36,60);
+    height: 100%;
+    width: 100%;
+    
+}
+.internacional h1{
+    text-align: center;
+    color: white;
+    padding-top: 25px;
+}
+
+/*seccion politica*/
+.politica{
+    background-color: rgb(226, 235, 238);
+    height: 100%;
+    width: 100%;
+    
+}
+.politica h1{
+    text-align: center;
+    color: black;
+    padding-top: 25px;
+}
+
+
+
+.titulo_periodista{
+    margin-top: 75px;
+    text-align: center;
+    background-color: white;
+    height: 500px;
+    width: 100%;
+    
+}

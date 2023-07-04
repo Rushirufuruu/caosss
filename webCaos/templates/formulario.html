@@ -1,0 +1,85 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+
+
+    
+    
+{% block contenido %}
+    <header>
+        <nav class="navbar navbar-expand-md py-2  navbar-light" style="background-color: rgb(226, 235, 238);" >
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'IND' %}">
+                    <img class="logo-pag" src="{% static 'img/LogoCaosNews.png' %}" alt="logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link " aria-current="page" href="{% url 'IND' %}">Inicio</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="{% url 'GAL' %}">Galería</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Categorías
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{% url 'DEP' %}">Deportes</a></li> 
+                        <li><a class="dropdown-item" href="{% url 'NAC' %}">Nacional</a></li>
+                        <li><a class="dropdown-item" href="{% url 'INT' %}">Internacional</a></li>
+                        <li><a class="dropdown-item" href="{% url 'POL' %}">Política</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'INI' %}">Ingresar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'PROD' %}">Productos CN</a>
+                </li>
+                </ul>
+                <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
+            </div>
+            
+        </nav>
+       
+   </header>
+    <body style="background-color:  rgb(74, 84, 114);">
+        <main>
+            <div class="formulario">
+                <h2>Registro</h2>
+                <form action="{% url 'FORM' %}" method="post" onsubmit="return validar()">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="txtNombre" name="txtNombre" required>
+            
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="txtApellido" name="txtApellido" required>
+            
+                <label for="rut">Rut:</label>
+                <input type="text" id="txtRut" name="txtRut" required>
+            
+                <label for="correo">Correo:</label>
+                <input type="email" id="txtEmail" name="txtEmail" required>
+            
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="pwdPass1" name="pwdPass1" required>
+            
+                <label for="repetir-contrasena">Repetir Contraseña:</label>
+                <input type="password" id="pwdPass2" name="pwdPass2" required>
+            
+                <input class="col-p" href="formulario.html" type="submit" value="Enviar" id="Enviar" onclick="validar()">
+                <p>¿Ya tienes una cuenta? <a href="{% url 'INI' %}">Inicia sesión aquí</a></p>
+                {%csrf_token%}
+                </form>
+            </div>
+        </main> 
+    </body>
+{% endblock contenido %}
+

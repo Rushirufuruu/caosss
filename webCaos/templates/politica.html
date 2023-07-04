@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block contenido %}
+    <div class="politica">
+        <h1 style="padding-top: 80px;">POLÍTICA</h1>
+        <div class="container py-4">
+           <div class="row row-cols-4 g-4">
+                {% for noticia in noticias %}
+                    {% if noticia.categoria.nombre == 'Politica' %}
+                        <div class="col">
+                            <div class="card h-100" >
+                                <img src={{noticia.foto.url}}  class="card-img-top" alt="..." style="height: 400;">
+                                <div class="card-body">
+                                    <p class="card-text"> {{noticia.fecha}} </p>
+                                    <h5 class="card-text text-muted"> {{noticia.titulo}} </h5>
+                                    <p class="card-text"> {{noticia.descripcion}} </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %} 
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock contenido %}
+
+
+ 

@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% load static %}
+    
+   {% block contenido %}
+    <header>
+        <nav class="navbar navbar-expand-md py-2  navbar-light" style="background-color: rgb(226, 235, 238);" >
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'IND' %}">
+                    <img class="logo-pag" src="{% static 'img/LogoCaosNews.png' %}" alt="logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link " aria-current="page" href="{% url 'IND' %}">Inicio</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="{% url 'GAL' %}">Galería</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Categorías
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{% url 'DEP' %}">Deportes</a></li> 
+                        <li><a class="dropdown-item" href="{% url 'NAC' %}">Nacional</a></li>
+                        <li><a class="dropdown-item" href="{% url 'INT' %}">Internacional</a></li>
+                        <li><a class="dropdown-item" href="{% url 'POL' %}">Política</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'INI' %}">Ingresar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'PROD' %}">Productos CN</a>
+                </li>
+                </ul>
+                <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
+            </div>
+            
+        </nav>
+       
+   </header>
+   
+   <body style="background-color:  rgb(74, 84, 114);">
+        <main>
+                <div class="noticias-container">
+                    <h2>Mis Noticias</h2>
+                    <table class="noticias-table">
+                        <thead>
+                        <tr>
+                            <th class="no-border">Foto</th>
+                            <th class="no-border">ID</th>
+                            <th class="no-border">Fecha</th>
+                            <th>Categoría</th>
+                            <th>Opciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for noticia in noticias %}
+                        <tr>
+                            <td><img src='{{noticia.foto.url}}' height="200px" width="200px"></td>
+                            <td>{{noticia.idNoticia}}</td>
+                            <td>{{noticia.fecha}}</td>
+                            <td>{{noticia.categoria}}</td>
+                            <td>
+                            <button onclick="modificar({{noticia.idNoticia}})" class="opciones-btn editar-btn">Editar</button>
+                            <button onclick="eliminar({{noticia.idNoticia}})" class="opciones-btn eliminar-btn">Eliminar</button>
+                            <button class="opciones-btn agregar-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="galeria_id({{noticia.idNoticia}})">Agregar imagen</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <script>
+                        function eliminar(id) {
+                            Swal.fire({
+                            title: '¿Estás seguro?',
+                            text: "No prodrás revertir esto!",
+                            icon: 'warning',
+                            showCancelButton: true, 
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Si! Eliminalo!'
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.href = '/eliminar_noticia/'+id+'/';
+                                Swal.fire(
+                                'Eliminado!',
+                                'Su noticia ha sido eliminada con éxito.',
+                                'success'
+                                )
+                            }
+                            })
+                            
+                        }
+
+                        function modificar(id) {
+                            location.href='/modificar/'+id+'/';
+                        }
+                        
+                        function galeria_id(id) {
+                            document.getElementById("txtId").value=id;
+                        }
+                    </script>
+                </div>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar imagen</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{% url 'AI' %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                Seleccione foto: 
+                                <br>
+                                <input type="file" name="txtFoto" id="txtFoto">
+                                <input type="hidden" name="txtId" id="txtId">
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+
+        </main>
+    </body>
+    
+{% endblock contenido %}
+   
+   {% block js %}
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+   
+   {% endblock js %}
+   
